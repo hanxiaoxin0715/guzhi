@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-ui: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+:root {
+  /* Self-hosted fonts via next/font — override @theme values with loaded fonts + fallbacks */
+  --font-serif: var(--nf-serif, "Cormorant Garamond", serif);
+  --font-ui: var(--nf-ui, "Inter", sans-serif);
+  --font-mono: var(--nf-mono, "JetBrains Mono", monospace);
+  /* FEICAI Design System Variables */
+  --bg-page: #0A0A0A;
+  --bg-surface: #141414;
+  --bg-card: #0A0A0A;
+  --border-default: #2A2A2A;
+  --border-gold: #C9A962;
+  --border-subtle: #1A1A1A;
+  --gold-primary: #C9A962;
+  --gold-transparent: #C9A96240;
+  --text-primary: #FFFFFF;
+  --text-secondary: #848484;
+  --text-tertiary: #6A6A6A;
+  --text-muted: #4A4A4A;
+}
+
+@layer base {
+  html, body {
+    height: 100%;
+  }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* 不确定进度条动画 — 用于智能分镜/翻译等无明确进度的场景 */
+@keyframes indeterminate {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
+/* 脉冲进度条动画 — 用于流水线执行中的当前阶段 */
+@keyframes progressPulse {
+  0%, 100% { opacity: 0.5; width: 40%; }
+  50%      { opacity: 1; width: 85%; }
+}
+
+@layer components {
+  /* 主要动作按钮 (金色/生成/开始) */
+  .btn-primary {
+    @apply flex items-center justify-center gap-2 rounded transition-all duration-300 ease-out 
+           active:scale-95 disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100
+           px-8 py-3 bg-[#C9A962] text-[#000] font-bold shadow-lg shadow-[#C9A962]/10 
+           hover:brightness-110 hover:-translate-y-0.5 hover:shadow-[#C9A962]/20;
+  }
+
+  /* 次要动作按钮 (保存/确认/边框样式) */
+  .btn-secondary {
+    @apply flex items-center justify-center gap-2 rounded transition-all duration-300 ease-out 
+           active:scale-95 disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100
+           px-6 py-2 bg-[#1A1A1A] border border-[#333] text-[#ededed] font-medium 
+           hover:bg-[#222] hover:border-[#444] hover:-translate-y-0.5;
+  }
+
+  /* 危险动作按钮 (删除/撤销) */
+  .btn-danger {
+    @apply flex items-center justify-center gap-2 rounded transition-all duration-300 ease-out 
+           active:scale-95 disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100
+           px-6 py-2 bg-red-600/10 border border-red-600/30 text-red-500 font-bold 
+           hover:bg-red-600 hover:text-white hover:-translate-y-0.5;
+  }
+
+  /* 幽灵按钮 (取消/返回/纯文字) */
+  .btn-ghost {
+    @apply flex items-center justify-center gap-2 rounded transition-all duration-300 ease-out 
+           active:scale-95 disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100
+           px-4 py-2 text-[#666] hover:text-[#ededed] hover:bg-white/5;
+  }
+
+  /* 侧边栏/小图标按钮 */
+  .btn-icon {
+    @apply flex items-center justify-center p-2 rounded-lg transition-all duration-200 
+           text-[#666] hover:text-[#ededed] hover:bg-white/5 active:scale-90;
+  }
+}
+
+/* Thin scrollbar for ref thumbnail bars */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #4A4A4A transparent;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  height: 3px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #4A4A4A;
+  border-radius: 2px;
+}
+
+/* Editor paragraph spacing */
+.ProseMirror {
+  outline: none;
+}
+.ProseMirror p {
+  margin-bottom: 1em;
+}
+.ProseMirror p:last-child {
+  margin-bottom: 0;
+}
+.ProseMirror > * + * {
+  margin-top: 0.75em;
+}
