@@ -6,7 +6,7 @@ import { twoPhaseExtract, type TwoPhaseConfig } from "@/app/lib/twoPhaseExtract"
 import { ProxyAgent } from "undici";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 600; // 10 min for multi-episode pipeline
+export const maxDuration = 300; // 5 min max for hobby plan
 
 // ★ getOutputsDir 现在从 outputs.ts 导入，使用项目隔离路径 outputs/prompts/{projectId}/
 //   修复：原先用 getBaseOutputDir() 写入根 outputs/，而 Studio 从 prompts/{projectId}/ 读取导致 404
