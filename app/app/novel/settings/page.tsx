@@ -425,7 +425,7 @@ export default function NovelSettingsPage() {
                                   </div>
                                   <button
                                       onClick={disableMockLLM}
-                                      disabled={saving || testingConnection}
+                                      disabled={saving}
                                       className="px-4 py-2 bg-[#1a1a1a] border border-amber-500/30 text-amber-500 text-[12px] font-medium rounded-lg hover:bg-amber-500/10 transition disabled:opacity-50"
                                   >
                                       关闭

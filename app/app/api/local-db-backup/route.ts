@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing key or value" }, { status: 400 });
     }
 
-    localDBSet(key, value);
+    await localDBSet(key, value);
     return NextResponse.json({ success: true });
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 });
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
     const key = searchParams.get("key");
 
     if (key) {
-      const value = localDBGet(key);
+      const value = await localDBGet(key);
       return NextResponse.json({ key, value });
     }
 
